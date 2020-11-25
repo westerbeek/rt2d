@@ -38,6 +38,9 @@ void MyScene::update(float deltaTime)
 {
 	// ###############################################################
 	// Escape key stops the Scene
+	float mx = input()->getMouseX();
+	float my = input()->getMouseY();
+	myentity->position = Point(mx, my);
 	// ###############################################################
 	if (input()->getKeyUp(KeyCode::Escape)) {
 		this->stop();
@@ -46,11 +49,14 @@ void MyScene::update(float deltaTime)
 	// ###############################################################
 	// Spacebar scales myentity
 	// ###############################################################
-	if (input()->getKeyDown(KeyCode::Space)) {
+	if (input()->getMouseDown(0)) {
 		myentity->scale = Point(0.5f, 0.5f);
+		
+		
 	}
-	if (input()->getKeyUp(KeyCode::Space)) {
+	if (input()->getMouseUp(0)) {
 		myentity->scale = Point(1.0f, 1.0f);
+		
 	}
 
 	// ###############################################################
@@ -58,7 +64,14 @@ void MyScene::update(float deltaTime)
 	// ###############################################################
 	if (t.seconds() > 0.0333f) {
 		RGBAColor color = myentity->sprite()->color;
-		myentity->sprite()->color = Color::rotate(color, 0.01f);
+		if (input()->getMouse(0)) {
+			myentity->sprite()->color = Color::rotate(color, 0.4f);
+
+
+		}
+		else {
+			myentity->sprite()->color = Color::rotate(color, 0.1f);
+		}
 		t.start();
 	}
 }
