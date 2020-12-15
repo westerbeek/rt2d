@@ -9,8 +9,11 @@
 
 #include "myscene.h"
 
+
+
 MyScene::MyScene() : Scene()
 {
+	
 	// start the timer.
 	t.start();
 
@@ -18,10 +21,14 @@ MyScene::MyScene() : Scene()
 	// the Sprite is added in Constructor of MyEntity.
 	myentity = new MyEntity();
 	myentity->position = Point2(SWIDTH/2, SHEIGHT/2);
+	
 
+	button = new Buttonclass();
+	button ->position = Point2(SWIDTH / 3, SHEIGHT / 3);
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
 	this->addChild(myentity);
+	this->addChild(button);
 }
 
 
@@ -29,17 +36,21 @@ MyScene::~MyScene()
 {
 	// deconstruct and delete the Tree
 	this->removeChild(myentity);
-
+	this->removeChild(button);
 	// delete myentity from the heap (there was a 'new' in the constructor)
+	
 	delete myentity;
+	delete button;
 }
 
 void MyScene::update(float deltaTime)
 {
 	// ###############################################################
 	// Escape key stops the Scene
-	float mx = input()->getMouseX();
-	float my = input()->getMouseY();
+	mx = input()->getMouseX();
+	my = input()->getMouseY();
+	button->mx = mx;
+	button->my = my;
 	myentity->position = Point(mx, my);
 	// ###############################################################
 	if (input()->getKeyUp(KeyCode::Escape)) {
@@ -47,15 +58,15 @@ void MyScene::update(float deltaTime)
 	}
 
 	// ###############################################################
-	// Spacebar scales myentity
+	// Mouseclick scales myentity
 	// ###############################################################
 	if (input()->getMouseDown(0)) {
-		myentity->scale = Point(0.5f, 0.5f);
+		myentity->scale = Point(0.1f, 0.1f);
 		
 		
 	}
 	if (input()->getMouseUp(0)) {
-		myentity->scale = Point(1.0f, 1.0f);
+		myentity->scale = Point(0.01f, 0.01f);
 		
 	}
 
