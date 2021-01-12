@@ -22,15 +22,5 @@ void MyEntity::update(float deltaTime)
 	// ###############################################################
 	// Rotate
 	// ###############################################################
-	if (input()->getMouse(0)) {
-		this->rotation.z += HALF_PI * deltaTime * 3;
 
-	}else{
-		this->rotation.z += HALF_PI * deltaTime * 1;
-
-	}
-	 // 90 deg/sec
-	if (this->rotation.z > TWO_PI) {
-		this->rotation.z -= TWO_PI;
-	}
 }

@@ -5,27 +5,55 @@
  */
 #include "GameGrid.h"
 
-int gridsize;
-
+int gridsize = 9;
+int startposition = 100;
 GameGrid::GameGrid() : Entity()
 {
 	//this->sprite()->color = RED;
-	button1 = new Buttonclass();
-	
-	button1->position = Point2(SWIDTH / 8, SHEIGHT / 4);
 
-	this->addChild(button1);
+	for (int x = 0; x < gridsize; x++) {
+		for (int y = 0; y < gridsize; y++) {
+		
+			Buttonclass* button = new Buttonclass();
+
+			buttons.push_back(button);
+
+			this->addChild(button);
+
+			button->position.x = x * 64+ startposition;
+			button->position.y = y * 64+ startposition;
+			
+		}
+	}
 }
 
 
 GameGrid::~GameGrid()
 {
-	this->removeChild(button1);
-	delete(button1);
+	//this->removeChild(button1);
+	//delete(button1);
 }
 
 void GameGrid::update(float deltaTime)
 {
-	button1->mx = mx;
-	button1->my = my;
+	for (int i = 0; i < buttons.size(); i++) {
+		buttons[i]->mx = mx;
+		buttons[i]->my = my;
+		if (buttons[i]->click == true) {
+
+			for (int a = 0; a < buttons.size(); a++) {
+				if (buttons[a]->sellected == true) {
+					buttons[a]->sellected = false;
+
+				}
+			}
+			
+			buttons[i]->sellected = true;
+			buttons[i]->click = false;
+		}
+		
+	}
+	
+	//button1->mx = mx;
+	//button1->my = my;
 }

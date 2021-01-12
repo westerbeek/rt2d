@@ -11,6 +11,7 @@
 
 #include <rt2d/entity.h>
 #include "Buttonclass.h"
+#include <vector>
 
 /// @brief The MyEntity class is the Entity implementation.
 class GameGrid : public Entity
@@ -30,8 +31,8 @@ public:
 	virtual void update(float deltaTime);
 
 private:
-	Buttonclass* button1;
-
+	std::vector<Buttonclass*> buttons;
+	Buttonclass* sellectedbutton;
 	/* add your private declarations */
 	//MyScene* myscne;
 };

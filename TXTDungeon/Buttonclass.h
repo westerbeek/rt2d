@@ -27,9 +27,15 @@ public:
 	/// 
 	float mx;
 	float my;
-
+	bool sellected;
+	int frame;
 	bool click;
 	bool hover;
+	bool hold;
+	int gridwidth = 1;
+	int gridheight = 1;
+	int cellwidth = 64;
+	int cellheight = 64;
 	virtual void update(float deltaTime);
 
 private:
