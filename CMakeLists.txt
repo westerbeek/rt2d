@@ -4,6 +4,7 @@ project (rt2d)
 
 # delete CMakeCache.txt from the build directory when you edit these options
 ####################################################################
+OPTION(MAKE_TXTDungeon "Make RT2D start application" ON)
 OPTION(MAKE_START "Make RT2D start application" ON)
 OPTION(MAKE_DEMO "Make RT2D demo (tests) application" ON)
 OPTION(MAKE_CANVAS_DEMO "Make RT2D Canvas demo (tests) application" ON)
@@ -156,6 +157,8 @@ IF(MAKE_START)
 		start/main.cpp
 		start/myentity.cpp
 		start/myentity.h
+		start/Buttonclass.cpp
+		start/Buttonclass.h
 		start/myscene.cpp
 		start/myscene.h
 	)
@@ -168,7 +171,30 @@ IF(MAKE_START)
 		DESTINATION ${CMAKE_BINARY_DIR}
 	)
 ENDIF()
-
+####################################################################
+# TXTDungeon                                                          #
+####################################################################
+IF(MAKE_TXTDungeon)
+	add_executable(TXTDungeon
+		TXTDungeon/main.cpp
+		TXTDungeon/myentity.cpp
+		TXTDungeon/myentity.h	
+		TXTDungeon/GameGrid.cpp
+		TXTDungeon/GameGrid.h
+		TXTDungeon/Buttonclass.cpp
+		TXTDungeon/Buttonclass.h
+		TXTDungeon/myscene.cpp
+		TXTDungeon/myscene.h
+	)
+	target_link_libraries(TXTDungeon
+		${ALL_GRAPHICS_LIBS}
+	)
+	# Copy assets to the build directory
+	file(
+		COPY TXTDungeon/assets
+		DESTINATION ${CMAKE_BINARY_DIR}
+	)
+ENDIF()
 ####################################################################
 # demo                                                             #
 ####################################################################
