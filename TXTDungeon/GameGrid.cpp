@@ -19,7 +19,9 @@ GameGrid::GameGrid() : Entity()
 			buttons.push_back(button);
 
 			this->addChild(button);
-
+			button->buttontype = 0;
+			button->cellheight = 64;
+			button->cellwidth = 64;
 			button->position.x = x * 64+ startposition;
 			button->position.y = y * 64+ startposition;
 			
