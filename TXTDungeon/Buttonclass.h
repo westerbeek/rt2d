@@ -34,8 +34,9 @@ public:
 	bool hold;
 	int gridwidth = 1;
 	int gridheight = 1;
-	int cellwidth = 64;
-	int cellheight = 64;
+	int cellwidth =  NULL;
+	int cellheight = NULL;
+	int buttontype = NULL;
 	virtual void update(float deltaTime);
 
 private:
